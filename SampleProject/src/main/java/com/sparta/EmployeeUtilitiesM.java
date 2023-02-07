@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.TimeZone;
 
-public class EmployeeUtilities {
+public class EmployeeUtilitiesM {
 
     private static ArrayList<String> faultyEmployees=new ArrayList<>();
     private  static Logger logger= LogManager.getLogger(" Employee App ");
@@ -28,7 +28,7 @@ public class EmployeeUtilities {
         xmlMapper.setTimeZone(TimeZone.getDefault());
     }
 
-    public static Employee createEmployee(String line) throws IncorrectFormatException, ParseException {
+    public static EmployeeM createEmployee(String line) throws IncorrectFormatException, ParseException {
 
         String[] employeeDetails=line.split(",");
 
@@ -46,7 +46,7 @@ public class EmployeeUtilities {
             Date dob=df.parse(employeeDetails[1]);
             Date joiningDate=df.parse(employeeDetails[5]);
 
-            Employee myEmployee=new Employee(employeeDetails[0],dob,
+            EmployeeM myEmployee=new EmployeeM(employeeDetails[0],dob,
                     employeeDetails[2],employeeDetails[3],employeeDetails[4].charAt(0),joiningDate);
 
             return myEmployee;
@@ -55,15 +55,15 @@ public class EmployeeUtilities {
 
     }
 
-    public static ArrayList<Employee> readEmployeesFromCsv(String fileName){
+    public static ArrayList<EmployeeM> readEmployeesFromCsv(String fileName){
 
-        ArrayList<Employee> myList=new ArrayList<>();
+        ArrayList<EmployeeM> myList=new ArrayList<>();
 
-        var empdetails=TextFileIO.readFile(fileName);
+        var empdetails= TextFileIOM.readFile(fileName);
 
         for(String line:empdetails){
 
-            Employee e= null;
+            EmployeeM e= null;
 
             try {
 
@@ -95,7 +95,7 @@ public class EmployeeUtilities {
 
     }
 
-    public static void listOfEmployeesToJSON(ArrayList<Employee> employees) throws IOException {
+    public static void listOfEmployeesToJSON(ArrayList<EmployeeM> employees) throws IOException {
 
 
 
@@ -103,25 +103,27 @@ public class EmployeeUtilities {
 
     }
 
-    public static void listOfEmployeesToXML(ArrayList<Employee> employees) throws IOException {
+    public static void listOfEmployeesToXML(ArrayList<EmployeeM> employees) throws IOException {
 
 
         xmlMapper.writeValue(new File("src/main/resources/employees.xml"),employees);
 
     }
 
-    public static ArrayList<Employee> readEmployeesFromJson(String filename) throws JsonProcessingException {
+    public static ArrayList<EmployeeM> readEmployeesFromJson(String filename) throws JsonProcessingException {
 
-        String jsonString=TextFileIO.readFromXmlOrJSON(filename);
-        return jsonMapper.readValue(jsonString, new TypeReference<ArrayList<Employee>>() {});
+        String jsonString= TextFileIOM.readFromXmlOrJSON(filename);
+        return jsonMapper.readValue(jsonString, new TypeReference<ArrayList<EmployeeM>>() {});
+
+    }
+
+    public static ArrayList<EmployeeM> readEmployeesFromXml(String filename) throws JsonProcessingException {
+
+        String xmlString= TextFileIOM.readFromXmlOrJSON(filename);
+        return xmlMapper.readValue(xmlString, new TypeReference<ArrayList<EmployeeM>>() {});
+
 
     }
 
-    public static ArrayList<Employee> readEmployeesFromXml(String filename) throws JsonProcessingException {
 
-        String xmlString=TextFileIO.readFromXmlOrJSON(filename);
-        return xmlMapper.readValue(xmlString, new TypeReference<ArrayList<Employee>>() {});
-
-
-    }
 }

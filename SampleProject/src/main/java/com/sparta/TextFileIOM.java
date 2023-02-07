@@ -1,10 +1,14 @@
 package com.sparta;
 
+
+
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class TextFileIO {
+public class TextFileIOM {
+
 
     /*public static void readFile(String fileName){
 
@@ -36,14 +40,14 @@ public class TextFileIO {
 
     }*/
 
-    public static ArrayList<String> readFile(String fileName){
+    public static ArrayList<String> readFile(String fileName) {
 
-        ArrayList<String> lines=new ArrayList<>();
+        ArrayList<String> lines = new ArrayList<>();
 
-        try(BufferedReader br=new BufferedReader(new FileReader(fileName))) {
+        try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
 
             String line;
-            while((line=br.readLine()) != null){
+            while ((line = br.readLine()) != null) {
 
                 lines.add(line);
             }
@@ -57,15 +61,15 @@ public class TextFileIO {
     }
 
 
-    public static void readFileCsv(String fileName){
+    public static void readFileCsv(String fileName) {
 
         System.out.println("Writing as array of strings");
 
-        try(BufferedReader br=new BufferedReader(new FileReader(fileName))) {
+        try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
 
             String line;
-            while((line=br.readLine()) != null){
-                var splitLine=line.split(",");
+            while ((line = br.readLine()) != null) {
+                var splitLine = line.split(",");
                 //System.out.println(line);
                 System.out.println(Arrays.toString(splitLine));
             }
@@ -76,15 +80,15 @@ public class TextFileIO {
 
     }
 
-    public static void readWriteFile(String inFile,String outFile){
+    public static void readWriteFile(String inFile, String outFile) {
 
-        try(BufferedReader br=new BufferedReader(new FileReader(inFile));
-            BufferedWriter bw=new BufferedWriter(new FileWriter(outFile))) {
+        try (BufferedReader br = new BufferedReader(new FileReader(inFile));
+             BufferedWriter bw = new BufferedWriter(new FileWriter(outFile))) {
 
             String line;
-            while((line=br.readLine()) != null){
+            while ((line = br.readLine()) != null) {
 
-                bw.write(line+"\n");
+                bw.write(line + "\n");
             }
 
         } catch (IOException e) {
@@ -93,23 +97,22 @@ public class TextFileIO {
 
     }
 
-    public static String readFromXmlOrJSON(String filename){
+    public static String readFromXmlOrJSON(String filename) {
 
-        StringBuilder sb=new StringBuilder();
-        try(BufferedReader br=new BufferedReader(new FileReader(filename))) {
+        StringBuilder sb = new StringBuilder();
+        try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
 
             String line;
-            while((line=br.readLine()) != null){
+            while ((line = br.readLine()) != null) {
 
                 sb.append(line);
             }
-
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
 
         return sb.toString();
     }
-
-
 }

@@ -9,7 +9,7 @@ import com.fasterxml.jackson.databind.ser.std.DateSerializer;
 import java.util.Date;
 import java.util.Objects;
 
-public class Employee {
+public class EmployeeM {
 
     private String employeeNo;
     @JsonSerialize(using = DateSerializer.class)
@@ -25,9 +25,11 @@ public class Employee {
     private Date dateOfJoining;
 
 
-    public Employee(){}
-    public Employee(String employeeNo, Date DOB, String firstName, String lastName,
-                    char gender, Date dateOfJoining) {
+    public EmployeeM() {
+    }
+
+    public EmployeeM(String employeeNo, Date DOB, String firstName, String lastName,
+                     char gender, Date dateOfJoining) {
 
         this.employeeNo = employeeNo;
         this.dateOfBirth = DOB;
@@ -90,24 +92,12 @@ public class Employee {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Employee employee = (Employee) o;
+        EmployeeM employee = (EmployeeM) o;
         return gender == employee.gender && Objects.equals(employeeNo, employee.employeeNo) && Objects.equals(dateOfBirth, employee.dateOfBirth) && Objects.equals(firstName, employee.firstName) && Objects.equals(lastName, employee.lastName) && Objects.equals(dateOfJoining, employee.dateOfJoining);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(employeeNo, dateOfBirth, firstName, lastName, gender, dateOfJoining);
-    }
-
-    @Override
-    public String toString() {
-        return "Employee{" +
-                "employeeNo='" + employeeNo + '\'' +
-                ", DOB='" + dateOfBirth + '\'' +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", gender=" + gender +
-                ", dateOfJoining='" + dateOfJoining + '\'' +
-                '}';
     }
 }
