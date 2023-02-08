@@ -3,8 +3,6 @@ package com.sparta.model;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
-import com.sparta.model.Employee;
-import com.sparta.model.ISerialiser;
 
 import java.io.File;
 import java.io.IOException;

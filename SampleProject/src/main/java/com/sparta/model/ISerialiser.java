@@ -1,7 +1,6 @@
 package com.sparta.model;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.sparta.model.Employee;
 
 import java.io.IOException;
 

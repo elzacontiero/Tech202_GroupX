@@ -25,9 +25,7 @@ public class Employee {
     private Date dateOfJoining;
 
 
-    public Employee() {
-    }
-
+    public Employee(){}
     public Employee(String employeeNo, Date DOB, String firstName, String lastName,
                     char gender, Date dateOfJoining) {
 
@@ -99,5 +97,17 @@ public class Employee {
     @Override
     public int hashCode() {
         return Objects.hash(employeeNo, dateOfBirth, firstName, lastName, gender, dateOfJoining);
+    }
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "employeeNo='" + employeeNo + '\'' +
+                ", DOB='" + dateOfBirth + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", gender=" + gender +
+                ", dateOfJoining='" + dateOfJoining + '\'' +
+                '}';
     }
 }
