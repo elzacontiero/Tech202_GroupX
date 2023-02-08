@@ -1,43 +1,57 @@
 package com.sparta.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.deser.std.DateDeserializers;
+import com.fasterxml.jackson.databind.ser.std.DateSerializer;
+
 import java.util.Date;
+import java.util.Objects;
 
 public class Employee {
 
-    private int empNo;
-    private Date birthDate;
+    private String employeeNo;
+    @JsonSerialize(using = DateSerializer.class)
+    @JsonDeserialize(using = DateDeserializers.DateDeserializer.class)
+    @JsonFormat(pattern = "dd/MM/yyyy")
+    private Date dateOfBirth;
     private String firstName;
     private String lastName;
     private char gender;
-    private Date hireDate;
+    @JsonSerialize(using = DateSerializer.class)
+    @JsonDeserialize(using = DateDeserializers.DateDeserializer.class)
+    @JsonFormat(pattern = "dd/MM/yyyy")
+    private Date dateOfJoining;
 
-    public Employee() {
-    }
 
-    public Employee(int empNo, Date birthDate, String firstName,
-                    String lastName, char gender, Date hireDate) {
-        this.empNo = empNo;
-        this.birthDate = birthDate;
+    public Employee(){}
+    public Employee(String employeeNo, Date DOB, String firstName, String lastName,
+                    char gender, Date dateOfJoining) {
+
+        this.employeeNo = employeeNo;
+        this.dateOfBirth = DOB;
         this.firstName = firstName;
         this.lastName = lastName;
         this.gender = gender;
-        this.hireDate = hireDate;
+        this.dateOfJoining = dateOfJoining;
+
     }
 
-    public int getEmpNo() {
-        return empNo;
+    public String getEmployeeNo() {
+        return employeeNo;
     }
 
-    public void setEmpNo(int empNo) {
-        this.empNo = empNo;
+    public void setEmployeeNo(String employeeNo) {
+        this.employeeNo = employeeNo;
     }
 
-    public Date getBirthDate() {
-        return birthDate;
+    public Date getDateOfBirth() {
+        return dateOfBirth;
     }
 
-    public void setBirthDate(Date birthDate) {
-        this.birthDate = birthDate;
+    public void setDateOfBirth(Date dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
     }
 
     public String getFirstName() {
@@ -64,24 +78,36 @@ public class Employee {
         this.gender = gender;
     }
 
-    public Date getHireDate() {
-        return hireDate;
+    public Date getDateOfJoining() {
+        return dateOfJoining;
     }
 
-    public void setHireDate(Date hireDate) {
-        this.hireDate = hireDate;
+    public void setDateOfJoining(Date dateOfJoining) {
+        this.dateOfJoining = dateOfJoining;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Employee employee = (Employee) o;
+        return gender == employee.gender && Objects.equals(employeeNo, employee.employeeNo) && Objects.equals(dateOfBirth, employee.dateOfBirth) && Objects.equals(firstName, employee.firstName) && Objects.equals(lastName, employee.lastName) && Objects.equals(dateOfJoining, employee.dateOfJoining);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(employeeNo, dateOfBirth, firstName, lastName, gender, dateOfJoining);
     }
 
     @Override
     public String toString() {
         return "Employee{" +
-                "empNo=" + empNo +
-                ", birthDate=" + birthDate +
+                "employeeNo='" + employeeNo + '\'' +
+                ", DOB='" + dateOfBirth + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", gender=" + gender +
-                ", hireDate=" + hireDate +
+                ", dateOfJoining='" + dateOfJoining + '\'' +
                 '}';
     }
-
 }
